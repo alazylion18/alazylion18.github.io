@@ -1,0 +1,34 @@
+body {
+    background-color: darkslategray;
+  }
+  #leo img {
+    height: 60%;
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #welcomeSection {
+    width: 60%;
+    margin: auto;
+  }
+  h1 {
+    color: papayawhip;
+    text-align: center;
+  }
+  h2 {
+    color: papayawhip;
+  }
+  h3 {
+    color: papayawhip;
+  }
+  pre {
+    font-size:20px;
+    color: papayawhip;
+    font: "Times New Roman";
+    font-style:normal;
+    width: 100%;
+  }
+  pre:hover {
+    font-style: oblique;
+  }
