@@ -245,25 +245,75 @@ let countries = [
   { "name": "Zimbabwe", "code": "ZW" }
 ]
 
+// Initializes numberCombination array object of 50 elements set to -1
+let numberCombination = new Array (50).fill('-1');
+
+// Initializas arrayOfCombinations array object, storing a combinations if the combination is unique
+let arrayofCombinations = new Array ()
+
+// Initializes a string variable set to True, functioning as a string version of a boolean condition
+let condition = "true";
 
 
-function generateCombination(){
-  numberCombination = []
-  let condition = "True"
-  for (let i=0; i < 50; i++){
-    function getRandomIntInclusive() {
-      min = Math.ceil(0);
-      max = Math.floor(242);
-      let num = Math.floor(Math.random() * (max - min + 1)) + min;
 
-      if ((numberCombination.includes(num)) != condition){
-        i--;
-        getRandomIntInclusive();
-      }
-      else{
-        numberCombination[i] = num;
-      }
+// Returns a random integer within a range, inclusive of both min and max... come on it's 2019, inclusivity is in
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+
+
+// Fills the numberCombination array with 50 unique numbers...truthyness is a funny thing, lol
+// The test must compare two variables of the same type or the test value won't be a truthy value
+function genCombination() {
+  for (let i=0; i <= 50; i++)
+  {
+    let num = getRandomIntInclusive(0,242);
+    let test = (numberCombination.includes(num)).toString();
+    if (test === condition)
+    {
+      i--;
+    }
+    else
+    {
+      numberCombination[i] = num;
     }
   }
-  window.alert(numberCombination)
 }
+
+
+// Adds the array to a list of arrays if the combination of numbers is unique, generates new combination if the combination existed in history of combinations
+function compareCombinations(){
+  genCombination();
+  let sortedCombination = numberCombination.sort((a, b) => a - b);
+  for (let i=0; i<= (arrayofCombinations.length+1); i++)
+  {
+    if (arrayofCombinations.length==0)
+    {
+      arrayofCombinations.push(sortedCombination);
+    }
+    //else if (((arrayofCombinations[i])==sortedCombination))
+    //{
+    //  let replacementCombination = genCombination();
+    //  numberCombination = replacementCombination;
+    //  compareCombinations();
+    //}
+    //else
+    //{
+    //  arrayofCombinations.push(sortedCombination);
+    //}
+  }
+}
+
+
+
+
+function printCombination() {
+  compareCombinations();
+  window.alert(numberCombination.sort((a, b) => a - b));
+  window.alert(arrayofCombinations.length);
+}
+
