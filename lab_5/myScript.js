@@ -247,25 +247,23 @@ let countries = [
 
 
 
-
-
-numberCombination = []
-
-let i;
-
-
-
 function generateCombination(){
-  for (i=0, i<=50, i++):
+  numberCombination = []
+  let condition = "True"
+  for (let i=0; i < 50; i++){
     function getRandomIntInclusive() {
       min = Math.ceil(0);
       max = Math.floor(242);
       let num = Math.floor(Math.random() * (max - min + 1)) + min;
-      if numberCombination.includes(num):
+
+      if ((numberCombination.includes(num)) != condition){
         i--;
         getRandomIntInclusive();
-      else:
+      }
+      else{
         numberCombination[i] = num;
+      }
     }
+  }
   window.alert(numberCombination)
 }
