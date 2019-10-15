@@ -254,6 +254,9 @@ let arrayofCombinations = new Array ()
 // Initializes a string variable set to True, functioning as a string version of a boolean condition
 let condition = "true";
 
+// Initializes a variable for the length of the combinations array
+let lengthOfCombinationsArray = arrayofCombinations.length;
+
 
 
 // Returns a random integer within a range, inclusive of both min and max... come on it's 2019, inclusivity is in
@@ -289,31 +292,43 @@ function genCombination() {
 function compareCombinations(){
   genCombination();
   let sortedCombination = numberCombination.sort((a, b) => a - b);
-  for (let i=0; i<= (arrayofCombinations.length+1); i++)
+  arrayofCombinations.push(sortedCombination);
+  //window.alert(arrayofCombinations.length);
+  for (let i=0; i<= (lengthOfCombinationsArray-1); i++)
   {
-    if (arrayofCombinations.length==0)
+    if (arrayofCombinations.length==2)
     {
       arrayofCombinations.push(sortedCombination);
     }
-    //else if (((arrayofCombinations[i])==sortedCombination))
-    //{
-    //  let replacementCombination = genCombination();
-    //  numberCombination = replacementCombination;
-    //  compareCombinations();
-    //}
-    //else
-    //{
-    //  arrayofCombinations.push(sortedCombination);
-    //}
+    else
+    {
+      if (((arrayofCombinations[i])==sortedCombination))
+      {
+        compareCombinations();
+      }
+      else
+      {
+        arrayofCombinations.push(sortedCombination);
+      }
+    }
   }
+  return sortedCombination;
 }
 
 
+function editPage(){
+  document.getElementById("instructions").innerHTML = countries.map(getCountry);
+}
 
 
 function printCombination() {
-  compareCombinations();
-  window.alert(numberCombination.sort((a, b) => a - b));
-  window.alert(arrayofCombinations.length);
+  currentCombination = compareCombinations();
+  let htmlCode = ''
+  for (let i = 0; i <= currentCombination.length; i++)
+  {
+    htmlCode = htmlCode + 
+
+  }
+  window.alert(currentCombination);
 }
 
