@@ -277,7 +277,7 @@ let arrayOfCountries = ["Afghanistan",  "Åland Islands", "Albania", "Algeria", 
 // Initializes numberCombination array object of 50 elements set to -1
 let numberCombination = new Array (50).fill('-1');
 
-// Initializas arrayOfCombinations array object, storing a combinations if the combination is unique
+// Initializes arrayOfCombinations array object, storing a combinations if the combination is unique
 let arrayofCombinations = new Array ()
 
 // Initializes a string variable set to True, functioning as a string version of a boolean condition
@@ -286,7 +286,8 @@ let condition = "true";
 // Initializes a variable for the length of the combinations array
 let lengthOfCombinationsArray = arrayofCombinations.length;
 
-
+// Initializes an array of 50 none elements, functioning as storage for pulled country names - pull country name using combination
+let countriesArray = new Array(50)
 
 // Returns a random integer within a range, inclusive of both min and max... come on it's 2019, inclusivity is in
 function getRandomIntInclusive(min, max) {
@@ -345,23 +346,56 @@ function compareCombinations(){
 }
 
 
-let countriesArray = new Array(50)
-
-for (let i=0; i<=50; i++){
-  combinationNumber = sortedCombination[i].toFixed(0);
-  countriesArray[i] = combinationNumber;
-}
-
 
 function editPage(){
   document.getElementById("instructions").innerHTML = countries.map(getCountry);
 }
 
+function inject(){
+  window.alert('inject')
+  document.getElementById("list").innerHTML = finalContent;
+}
+
+
 
 function printCombination() {
   currentCombination = compareCombinations();
-  window.alert(countriesArray)
-  //let htmlCode = ''
   window.alert(currentCombination);
+
+
+  function injectCombination (combination, aoc){
+    for (let i=0; i<=50; i++){
+      let index = '';
+      index = combination[i];
+      let numericIndex = new Number(index);
+      //window.alert(numericIndex);
+      combinationNumber = aoc[numericIndex];
+      countriesArray[i] = combinationNumber;
+    }
+  }
+  answer = injectCombination(currentCombination, arrayOfCountries);
+  window.alert(countriesArray);
+
+  window.alert('hi')
+  function editPage(htmlCountries){
+    let injection = new Array(50);
+
+    htmlCountries.forEach(function(item, array) {
+      let string_item = '';
+      string_item = item;
+      let beginTag = '<li>';
+      let endTag = '</li>';
+      let injectionString = '';
+      injectionString = beginTag + string_item + endTag;
+      injection.push(injectionString);
+    })
+    return injection;
+  }
+
+  let content = '';
+  content = editPage(countriesArray);
+  stringContent = content.join("");
+  window.alert(stringContent);
+  inject();
 }
 
