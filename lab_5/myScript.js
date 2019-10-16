@@ -351,8 +351,8 @@ function editPage(){
   document.getElementById("instructions").innerHTML = countries.map(getCountry);
 }
 
-function inject(){
-  window.alert('inject')
+function inject(finalContent){
+  //window.alert('inject');
   document.getElementById("list").innerHTML = finalContent;
 }
 
@@ -360,11 +360,11 @@ function inject(){
 
 function printCombination() {
   currentCombination = compareCombinations();
-  window.alert(currentCombination);
+  //window.alert(currentCombination);
 
 
   function injectCombination (combination, aoc){
-    for (let i=0; i<=50; i++){
+    for (let i=0; i<=49; i++){
       let index = '';
       index = combination[i];
       let numericIndex = new Number(index);
@@ -374,9 +374,9 @@ function printCombination() {
     }
   }
   answer = injectCombination(currentCombination, arrayOfCountries);
-  window.alert(countriesArray);
+  //window.alert(countriesArray);
 
-  window.alert('hi')
+  //window.alert('hi')
   function editPage(htmlCountries){
     let injection = new Array(50);
 
@@ -395,7 +395,7 @@ function printCombination() {
   let content = '';
   content = editPage(countriesArray);
   stringContent = content.join("");
-  window.alert(stringContent);
-  inject();
+  //window.alert(stringContent);
+  inject(stringContent);
 }
 
