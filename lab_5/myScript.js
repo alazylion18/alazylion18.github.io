@@ -346,11 +346,6 @@ function compareCombinations(){
 }
 
 
-
-function editPage(){
-  document.getElementById("instructions").innerHTML = countries.map(getCountry);
-}
-
 function inject(finalContent){
   //window.alert('inject');
   document.getElementById("list").innerHTML = finalContent;
