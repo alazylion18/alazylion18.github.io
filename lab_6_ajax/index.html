@@ -4,6 +4,7 @@
 <head>
   <title>Test AJAX page</title>
   <link rel="stylesheet" type="text/css" href="./lab_styles.css">
+  <script src="myScript.js"></script>
 </head>
 
 <body>
@@ -19,7 +20,7 @@
     function loadData() {
       fetch('ajax_sample.json')
         .then(res => res.json())
-        .then(data => data.map(c => c.code))
+        .then(data => data.map(c => c.name))
         .then(data => document.querySelector(".content").innerText = data);
     }
   </script>
