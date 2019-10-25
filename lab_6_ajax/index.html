@@ -3,8 +3,7 @@
 
 <head>
   <title>Test AJAX page</title>
-  <link rel="stylesheet" type="text/css" href="./lab_styles.css">
-  <script src="myScript.js"></script>
+  <link rel="stylesheet" type="text/css" href="./lab_styles.css"> </link>
 </head>
 
 <body>
@@ -17,11 +16,33 @@
     </div>
   </div>
   <script>
+      function getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+    }
+    
+    
+
+
     function loadData() {
       fetch('ajax_sample.json')
-        .then(res => res.json())
-        .then(data => data.map(c => c.name))
-        .then(data => document.querySelector(".content").innerText = data);
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+          //console.log(data);
+          let nameArray =  data.map(data => data.name);
+          let instructions = document.querySelector('.content');
+          instructions.innerHTML = '';
+          for(let i = 0; i < 14; i ++){
+            const selectNumber = getRandomIntInclusive(0, 242);
+            let el = document.createElement("li");
+            el.innerText = nameArray[selectNumber];
+
+            instructions.appendChild(el);
+          }
+        });
     }
   </script>
 </body>
