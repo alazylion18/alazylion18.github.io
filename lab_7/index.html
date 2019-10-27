@@ -17,14 +17,67 @@
   </div>
   <script>
     function loadData() {
-      fetch('ajax_sample.json')
-        .then(res => res.json())
-        .then(res => {
-          // you can now work in this area
+      function initializeDataArray() {
+        let arrayOfRoutes = ['104', '105', '108', '109', '111', '113', '114', '115', '116', '117',
+                            '118', '122', '123', '126', '127', '128', '131', '132', '133', '140', 
+                            '141', '142', '143'];
+        return arrayOfRoutes;
+      }
 
-          return res;
-        })
-        .then(data => document.querySelector(".content").innerText = data);
+      let arrayData = initializeDataArray();
+      let length_arrayData = arrayData.lenth;
+      console.log(arrayData);
+
+
+      let routeIDArray =  new Array(length_arrayData);
+      let titleArray =  new Array(length_arrayData);
+      let objectsArray = new Array(4);
+      let counter = 0
+
+      for (let i=0; i<= arrayData.length; i++){
+        let genericURL = 'https://api.umd.io/v0/bus/routes/';
+        routeURL = genericURL + arrayData[i]
+        
+        // Fetchs the data for the route from the generated page
+        fetch(routeURL)
+          .then(res => {
+            console.log(res);
+            return res.json();
+          })
+        // Extracts the desired value using a key, adds value to an array... two arrays and two desired values, one array per desired value
+          .then(data => {
+            //console.log(data);
+            routeIDArray.push(data.route_id);
+            titleArray.push(data.title);
+            objectsArray[0] = routeIDArray;
+            objectsArray[1] = titleArray;
+            //console.log(objectsArray[0]);
+           // console.log(objectsArray[1]);
+          })
+          // Removes  null value at index 0 of each array
+          .then(data => {
+            if (counter ==0){
+              objectsArray[0].shift();
+              objectsArray[1].shift();
+              counter = counter +1;
+            }
+            console.log(objectsArray[0]);
+            console.log(objectsArray[1]);
+            return objectsArray;
+          })
+          // Appends an unordered list element to the .content div... unordered list element is 'name      id' of bus route
+          .then(routeInfoArray => {
+            let id = objectsArray[0];
+            let name = objectsArray[1];
+            let instructions = document.querySelector('.content');
+            let el = document.createElement("ul");
+            id_bus = id[i];
+            name_bus = name[i];
+            let routeAsText = name_bus +  '    ' + id_bus;
+            el.innerText = routeAsText;
+            instructions.appendChild(el);
+          });
+        }
     }
   </script>
 </body>
