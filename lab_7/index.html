@@ -76,6 +76,39 @@
             let routeAsText = name_bus +  '    ' + id_bus;
             el.innerText = routeAsText;
             instructions.appendChild(el);
+            return objectsArray;
+          })
+          // Generates a random number, pulls both id and title of route using the randomly generated number, inserts the route on the page
+          .then(randomRoute => {
+            if (i== arrayData.length-1){
+              function getRandomIntInclusive(min, max) {
+              min = Math.ceil(min);
+              max = Math.floor(max);
+             return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+             }
+
+              // Sets random number
+              let randomNumber = getRandomIntInclusive(0, arrayData.length);
+
+              // Pulls id and name of a route using the randomly generated number
+              let id = objectsArray[0];
+              let name = objectsArray[1];
+              id_bus = id[randomNumber];
+              name_bus = name[randomNumber];
+              let randomNumberRoute = name_bus +  '    ' + id_bus;
+              console.log(randomNumberRoute);
+
+              // Inserts the route on the page
+              let header = document.querySelector('.header');
+              let headerText = header.innerHTML;
+              let busName_randomNumberRoute = name_bus
+              header.innerHTML = headerText + " " + busName_randomNumberRoute;
+              return randomNumberRoute;
+            }
+          })
+          .then(randomNumberRoute => {
+            console.log(randomNumberRoute);
+            return randomNumberRoute;
           });
         }
     }
