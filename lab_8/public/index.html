@@ -1,33 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Test AJAX page</title>
+    <link rel="stylesheet" type="text/css" href="./lab_styles.css" />
+  </head>
 
-<head>
-  <title>Test AJAX page</title>
-  <link rel="stylesheet" type="text/css" href="./lab_styles.css">
-</head>
-
-<body>
-  <div class="container">
-    <div class="wrapper">
-      <div class="header">API Loader</div>
-      <button class="button" onclick="loadData()">Load Some JSON from a server</button>
-      <div class="content"></div>
-      <div class="footer"></div>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="header">API Loader</div>
+        <button class="button" onclick="loadData()">
+          Load Some JSON from a server
+        </button>
+        <div class="content"></div>
+        <div class="footer"></div>
+      </div>
     </div>
-  </div>
-  <script>
-    function loadData() {
-      console.log('fetch'); // confirm code is running on click
-      fetch('/api')
-        .then(res => res.json())
-        .then(res => {
-          console.log(res); // logging step to check what we got
-          return res;
-        })
-        .then(res => res.data.map(c => c.route_id))
-        .then(codes => document.querySelector(".content").innerText = codes);
-    }
-  </script>
-</body>
+    <script>
+      function loadData() {
+        console.log("fetch"); // confirm code is running on click
+        fetch("/api")
+          .then(res => {
+            let resjson = res.json();
+            return resjson;
+          })
+          .then(resjson => {
+            console.log(resjson); // logging step to check what we got
+            return resjson;
+          })
+          .then(res => {
+            let course_name = [];
+            let course_id = [];
+            let objectsArray = [];
+            course_name = res.data.map(c => c.name);
+            course_id = res.data.map(c => c.course_id);
+            objectsArray.push(course_name);
+            objectsArray.push(course_id);
+            return objectsArray;
+          })
+          .then(objectsArray => {
+            //console.log(objectsArray[0]);
+            //console.log(objectsArray[1]);
+            let course_nameINST = [];
+            course_nameINST = objectsArray[0];
+            let course_idINST = [];
+            course_idINST = objectsArray[1];
+            //console.log('here you go');
+            // console.log(course_idINST);
 
+            let indexes = [];
+            let desired_course_nameINST = [];
+            let desired_course_idINST = [];
+            for (let i = 0; i <= course_idINST.length; i++) {
+              let value = course_idINST[i];
+              if (value.search("INST") != -1) {
+                //console.log('YES');
+                //console.log(value);
+                indexes.push(i);
+                console.log(course_nameINST[i]);
+                console.log(course_idINST[i]);
+               // console.log(indexes);
+                let instructions = document.querySelector('.content');
+                let el = document.createElement("ol");
+                el.innerText = course_idINST[i] + ": "+ course_nameINST[i];
+                instructions.appendChild(el);
+                //document.querySelector(".content").innerText = course_nameINST[i];
+              }
+            }
+            console.log(indexes);
+            // console.log(course_nameINST);
+            document.querySelector(".content").innerText = objectsArray[1];
+            return objectsArray;
+          });
+      }
+    </script>
+  </body>
 </html>
