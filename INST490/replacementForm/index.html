@@ -5,106 +5,96 @@
 <html lang="en">
   <head id="metadata">
     <meta charset="UTF-8" />
-    <title>Hardware/Software/Communications Acquisition Form</title>
-    <meta name="description" content="A demonstration of the Automated IT Request Form"/>
+    <title>Hardware/Software/Communications Replacement Form</title>
+    <meta
+      name="description"
+      content="A demonstration of the Automated IT Replacement Form"
+    />
     <meta name="author" content="UMD INST 490 Team" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="modernizr.js"></script>
     <script src="jquery.js"></script>
     <script src="jquery-ui.js"></script>
-    <link href="jquery-ui.css" rel="stylesheet">
+    <link href="jquery-ui.css" rel="stylesheet" />
 
     <style>
       @import url("requestForm.css");
     </style>
 
+    <script>
+      function addField(argument) {
+        var myTable = document.getElementById("myTable");
+        var currentIndex = myTable.rows.length;
+        var currentRow = myTable.insertRow(-1);
+
+        var linksBox = document.createElement("input");
+        linksBox.setAttribute("name", "links" + currentIndex);
+
+        var keywordsBox = document.createElement("input");
+        keywordsBox.setAttribute("name", "keywords" + currentIndex);
+
+        var violationsBox = document.createElement("input");
+        violationsBox.setAttribute("name", "violationtype" + currentIndex);
+
+        var addRowBox = document.createElement("input");
+        addRowBox.setAttribute("type", "button");
+        addRowBox.setAttribute("value", "Add another line");
+        addRowBox.setAttribute("onclick", "addField();");
+        addRowBox.setAttribute("class", "button");
+
+        var currentCell = currentRow.insertCell(-1);
+        currentCell.appendChild(linksBox);
+
+        currentCell = currentRow.insertCell(-1);
+        currentCell.appendChild(keywordsBox);
+
+        currentCell = currentRow.insertCell(-1);
+        currentCell.appendChild(violationsBox);
+
+        currentCell = currentRow.insertCell(-1);
+        currentCell.appendChild(addRowBox);
+      }
+    </script>
   </head>
 
-
-
   <body>
-      <div class="form">
-        <header role = "banner" style="font-size:60px">New Acquisition Section</header>
-        <form role="form" action="/action_page.php" target="_blank" method="POST">
-          <fieldset>
-                <legend>Contact Information (Required)</legend>
-                <p><label for="email">Originator (E-mail Address) </label></p>
-                <input type="email" id="email" name="email" autocomplete="off" placeholder="user@domain.com">
-                <p><label for="email">End Username  </label></p>
-                <input type="name" id="username"  name="username" placeholder="username">
-                <p><label for="dateRequested">Date Requested:  </label></p>
-                <input type="date"  id="dateRequested" name="dateRequested">
-                <p><label for="dateRequired">Date Required  </label></p>
-                <input type="date"  id="dateRequired" name="dateRequired">
-                <p><label for="accountCode"><abbr title="Expenditure Account Code">Expenditure Acct. Code  </abbr></label></p>
-                <input type="name" id="accountCode"  name="accountCode" placeholder="123-456-7890">
-                <p><label for="cost">Estimated Cost:  </label></p>
-                <input type="number" id="cost"  name="cost" min="0" step=".01" placeholder="0.00">
-                <p><label for="hardwareType">What type of hardware? </label>
-                <datalist id="hardwareType">
-                        <select name="hardwareType">
-                                <option>PC</option>
-                                <option>Mac</option>
-                                <option>Other</option>
-                        </select>
-                        If other, please specify:
-                </datalist>
-                </p>
-                <input id="hardwareType" name="hardwareType" list="hardwareType">
-                <p><label for="softwareType">What type of software? </label>
-                <datalist id="softwareType">
-                         <select name="softwareType">
-                                <option>Windows</option>
-                                <option>MacOS</option>
-                                <option>Linux</option>
-                                <option>Other</option>
-                        </select>
-                        If other, please specify:
-                </datalist>
-               </p>
-               <input id="softwareType" name="softwareType" list="softwareType">
-          </fieldset>
-          <br>
-          <fieldset>
-                <legend>Hardware/Software Description (Required)</legend>
-                <p style="font-size:15px;"><label  for="desription">Describe the specific product(s) and/or the configuration(s) needed here:</label></p>
-                <textarea name="message" id = "desription" rows="15" cols="100"></textarea >           
-        </fieldset>
-        <br>
+    <div class="form">
+      <header role="banner" style="font-size:60px">
+        Replacement Hardware/Software Section
+      </header>
+      <form
+        role="form"
+        action="alazylion18.github.io/INST490/approvalForm"
+        target="_blank"
+        method="POST"
+      >
         <fieldset>
-                <legend>Purpose of Request (Required)</legend>
-                <p style="font-size:15px;"><label for="explanation">Please provide a detailed explanation of items requested and how they will be used</label></p>
-                <textarea name="message" id = "explanation"  rows="15" cols="100"></textarea > 
-                <p style="font-size:15px;"><label for="why">a) Why is the acquisition needed?</label></p>
-                <textarea name="message" id = "why"  rows="15" cols="100"></textarea > 
-                <p style="font-size:15px;"><label for="currentStatus">b) What is currently being done?</label></p>
-                <textarea name="message" id = "currentStatus"  rows="15" cols="100"></textarea > 
-                <p style="font-size:15px;"><label for="benefits">c) What benefits will this acquisition provide?</label></p>
-                <textarea name="message" id = "benefits"  rows="15" cols="100"></textarea > 
-                <p style="font-size:15px;"><label for="alternatives">d) What alternatives have been considered?</label></p>
-                <textarea name="message" id = "alternatives"  rows="15" cols="100"></textarea >   
-                <p style="font-size:15px;"><label for="desription">e) Was this acquisition included in your annual automation plan submitted to the Information Technology and Communications Division?</label></p>
-                <input type="radio" name="gender" value="yes" id="yesCheck" /> Yes<br />
-                <input type="radio" name="gender" value="no" id="noCheck" checked /> No<br />    
+          <legend>Replacement Hardware</legend>
+          <p style="font-size:15px;">
+            <label for="desription" >Describe the specific replacement(s) and/or the configuration(s) needed here:</label>
+          </p>
+          <table id="myTable">
+            <tr>
+              <td><input type="text" name="Hardware or Software" placeholder="Hardware or Software" /></td>
+              <td><input type="text" name="keywords" placeholder="Brand"/></td>
+              <td><input type="text" name="violationtype" placeholder="Product ID Code"/></td>
+              <td>
+                <input
+                  type="button"
+                  class="button"
+                  value="Add another line"
+                  onclick="addField();"
+                />
+              </td>
+            </tr>
+          </table>
         </fieldset>
-        <br />   
-        <fieldset>
-                <legend>Review and Submit OR Review and Reset</legend>
-        <p style="font-style:oblique" style="font: size 20px"><label>>Please review the entire form, checking for mistakes. Click the submit button when the form is complete. </label></p>
-        <p style="font-style:oblique" style="font: size 20px"><label>>Click the refresh button to begin from scratch. </label></p>
-        </fieldset>
-        <br />  
-        <fieldset>
-                <legend>Is this a replacement?</legend>
-                <p style="font-style:oblique" style="font: size 20px"><label>>Please click "Replacement", if you need a replacement item. </label></p>
-                <p><button onclick="window.location.href = 'https://w3docs.com'">Replacement</button></p>
-        </fieldset>
-        <br />  
-        <br />  
-        <br />  
-        <p><nave role="navigation"></nave><button type="submit">Sumitt</button></p>
-        </form>
-      </div>
-</body>
+        <br />
+        <p>
+          <nave role="navigation"></nave><button type="submit">Submit</button>
+        </p>
+      </form>
+    </div>
+  </body>
 </html>
